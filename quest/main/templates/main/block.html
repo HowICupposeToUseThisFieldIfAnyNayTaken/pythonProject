@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    {% block title %}
+    {% endblock %}
+    <aside>
+    Доброго времени суток.
+    {% if user.is_authenticated %}
+        <form method="post" action="{% url 'logout' %}">
+            {% csrf_token %}
+            Вы вошли как {{ user }}  <button type="submit">Выйти</button>
+        </form>
+    {% else %}
+            Вы еще не авторизовались, вы можете
+            <form method="post" action="{% url 'login' %}">
+            {% csrf_token %}
+            <button type="submit">Войти</button>
+            </form>
+            или
+            <form method="post" action="{% url 'register' %}">
+            {% csrf_token %}
+                <button type="submit">Зарегистрироваться</button>
+            </form>
+    {% endif %}
+    </aside>
+</head>
+<body>
+
+    <aside>
+        <h3> Карта сайта</h3>
+        <ul>
+            <a href = "{% url 'home' %}"><li>Главная </li></a>
+            <a href = "{% url 'about' %}"><li>О нас </li></a>
+            <a href = "{% url 'datab_view' %}"><li>Первая часть задания </li></a>
+            <a href = "{% url 'datab_sort' %}"><li>Вторая часть задания </li></a>
+            <a href = "admin"><li>Админка</li></a>
+            {% if user.is_authenticated %}
+            <a href = "{% url 'profile' %}"><li>Ваш профиль {{ user }}</li></a>
+            {% endif %}
+
+        </ul>
+    </aside>
+    <main>
+        {% block content %}
+        {% endblock %}
+    </main>
+
+</body>
+</html>

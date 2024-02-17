@@ -1,0 +1,35 @@
+{% extends 'main/block.html' %}
+
+{% block title %}
+    <title>Вторая часть задания</title>
+{% endblock %}
+
+
+{% block content %}
+
+    <h1> Список сотрудников</h1>
+    <h5> Сортировка</h5>
+<form method='post'>{% csrf_token %}
+    <input type="submit" value=" по имени"  name="sort_name">
+    <input type="submit" value=" по должности"  name="sort_rang">
+    <input type="submit" value=" по зп"  name="sort_salary">
+    <input type="submit" value=" по дате"  name="sort_date">
+
+</form>
+{% if employee_t %}
+    {% for empl in employee_t %}
+
+            <h4>{% if empl.photo %}
+                <img class="img-arcticle-left" src="{{empl.photo.url}}" width="100">
+            {% endif %} ФИО - {{ empl.full_name }},
+            | Должность - {{ empl.position }},
+            | Нанят(а) - {{ empl.hired }},
+            | Зп - {{ empl.salary }} руб.</h4>
+    {% endfor %}
+{% else %}
+    <h3>Нет сотрудников, даже нет сотрудников чтобы нанимали сотрудников</h3>
+{% endif %}
+<button> Сортировать </button>
+
+{% endblock %}
+

@@ -1,0 +1,71 @@
+{% extends 'main/block.html' %}
+
+{% block title %}
+    <title>Первая часть задания</title>
+{% endblock %}
+
+{% block content %}
+    <h1> Список сотрудников</h1>
+{% if employee_t %}
+
+        <ul id="myUL">
+            <li><span class="caret">Руководитель проекта</span>
+                <ul class="nested">
+                    {% for empl in employee_t %}
+                        {% if empl.position == 'Руководитель проекта' %}
+                            <li>ФИО - {{ empl.full_name }}
+                            <!- | Должность - {{ empl.position }},
+                            | Нанят(а) - {{ empl.hired }},
+                            | Зп - {{ empl.salary }} руб. -></li>
+                        {% endif %}
+                    {% endfor %}
+      <li><span class="caret">Старший Инженер</span>
+        <ul class="nested">
+                    {% for empl in employee_t %}
+                        {% if empl.position == 'Старший Инженер' %}
+                            <li>ФИО - {{ empl.full_name }}
+                            <!- | Должность - {{ empl.position }},
+                            | Нанят(а) - {{ empl.hired }},
+                            | Зп - {{ empl.salary }} руб.-> </li>
+                        {% endif %}
+                    {% endfor %}
+          <li><span class="caret">Инженер</span>
+              <ul class="nested">
+                    {% for empl in employee_t %}
+                        {% if empl.position == 'Инженер' %}
+                            <li>ФИО - {{ empl.full_name }}
+                            <!- | Должность - {{ empl.position }},
+                            | Нанят(а) - {{ empl.hired }},
+                            | Зп - {{ empl.salary }} руб. -></li>
+                        {% endif %}
+                    {% endfor %}
+
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+
+    {% for empl in employee_t %}
+        {% if empl.position != 'Инженер' %}
+        {% if empl.position != 'Старший Инженер' %}
+        {% if empl.position != 'Руководитель проекта' %}
+            <li><span class="caret">Прочие</span>
+            <ul class="nested">
+            <li>ФИО - {{ empl.full_name }}
+            <!- | Должность - {{ empl.position }},
+            | Нанят(а) - {{ empl.hired }},
+            | Зп - {{ empl.salary }} руб. -></li>
+                </ul>
+          </li>
+        {% endif %}{% endif %}{% endif %}
+    {% endfor %}
+            </ul>
+{% else %}
+    <h3>Нет сотрудников, даже нет сотрудников чтобы нанимали сотрудников</h3>
+{% endif %}
+<button> Сортировать </button>
+
+{% endblock %}
+

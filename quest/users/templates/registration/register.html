@@ -1,0 +1,17 @@
+{% extends 'main/block.html' %}
+
+{% block title %}
+    <title>Регистрация</title>
+{% endblock %}
+
+{% block content %}
+    <h1> Регистрация</h1>
+        {% if form.errors %}
+            <p> {{ form.errors.error }} </p>
+        {% endif %}
+    <form action="{% url 'register' %}" method="post">
+        {{ form }}
+        {% csrf_token %}
+        <button type = "submit">зарегистрировать</button>
+    </form>
+{% endblock %}

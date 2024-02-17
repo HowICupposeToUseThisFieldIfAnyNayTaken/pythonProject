@@ -1,0 +1,17 @@
+{% extends 'main/block.html' %}
+
+{% block title %}
+    <title>Главная страница</title>
+{% endblock %}
+
+{% block content %}
+    <h1> Главная страница н1</h1>
+    <p> Главная страница p</p>
+
+    <form action="" method = "post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Загрузить изображение</button>
+    </form>
+
+{% endblock %}
